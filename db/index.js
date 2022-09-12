@@ -9,9 +9,7 @@ const initDB = async () => {
 
   const User = initUser(sequelize);
 
-  if (process.env.FORCE_SYNC) {
-    await sequelize.sync();
-  }
+  await sequelize.sync();
   return {
     User,
   };
