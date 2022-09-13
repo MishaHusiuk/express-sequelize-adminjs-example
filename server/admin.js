@@ -1,23 +1,23 @@
-const AdminBro = require("admin-bro");
-const AdminBroExpressjs = require("admin-bro-expressjs");
-const dbAdapter = require("admin-bro-sequelizejs");
+const AdminJS = require("adminjs");
+const AdminJSExpress = require("@adminjs/express");
+const dbAdapter = require("@adminjs/sequelize");
 
 
 module.exports = function(resources){
-  // We have to tell AdminBro that we will manage sequelize resources with it
-  AdminBro.registerAdapter(dbAdapter);
+  // We have to tell AdminJS that we will manage sequelize resources with it
+  AdminJS.registerAdapter(dbAdapter);
   
-  // Pass all configuration settings to AdminBro
-  const adminBro = new AdminBro({
+  // Pass all configuration settings to AdminJS
+  const admin = new AdminJS({
     resources,
     rootPath: "/admin",
   });
   
-  // Build and use a router which will handle all AdminBro routes
-  const router = AdminBroExpressjs.buildRouter(adminBro);
+  // Build and use a router which will handle all AdminJS routes
+  const router = AdminJSExpress.buildRouter(admin);
   
   return {
-    rootPath: adminBro.options.rootPath,
+    rootPath: admin.options.rootPath,
     router,
   }
 };
