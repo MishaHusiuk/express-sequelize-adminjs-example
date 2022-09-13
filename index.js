@@ -4,7 +4,7 @@ const initAdmin = require("./server/admin");
 const initDB = require("./db");
 
 (async() => {
-  const { User } = await initDB();
+  const { User, Comment } = await initDB();
 
   const app = express();
   
@@ -12,7 +12,7 @@ const initDB = require("./db");
   
   app.use(router);
 
-  const admin = initAdmin([ User ]);
+  const admin = initAdmin([ User, Comment ]);
   app.use(admin.rootPath, admin.router);
   
   app.listen(3000, () => {

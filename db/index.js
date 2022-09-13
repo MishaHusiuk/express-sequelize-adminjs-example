@@ -1,18 +1,13 @@
 const { Sequelize } = require("sequelize");
-const initUser = require("./user");
+const initModels = require("./models");
 
-const initDB = async () => {
+const initDB = () => {
   const sequelize = new Sequelize("test_db", "postgres", "guest", {
     host: "localhost",
     dialect: "postgres",
   });
 
-  const User = initUser(sequelize);
-
-  await sequelize.sync();
-  return {
-    User,
-  };
+  return initModels(sequelize);
 };
 
 module.exports = initDB;
