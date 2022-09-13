@@ -9,8 +9,8 @@ router.get("/users", async (req, res) => {
 
 router.post("/users", async (req, res) => {
   const { firstName, lastName } = req.body;
-  await sequelize.models.User.create({ firstName, lastName });
-  res.send(201);
+  const user = await sequelize.models.User.create({ firstName, lastName });
+  res.status(201).send(user);
 });
 
 router.get("/users/:userId/comments", async (req, res) => {
@@ -26,13 +26,13 @@ router.get("/users/:userId/comments", async (req, res) => {
 router.post("/users/:userId/comments", async (req, res) => {
   const { text, upvotes, downvotes } = req.body;
   const userId = Number(req.params.userId);
-  await sequelize.models.Comment.create({ 
+  const comment = await sequelize.models.Comment.create({ 
     text,
     upvotes,
     downvotes,
     UserId: userId
   });
-  res.send(201);
+  res.status(201).send(comment);
 });
 
 module.exports = router;
