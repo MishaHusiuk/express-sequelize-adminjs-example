@@ -1,10 +1,10 @@
 const express = require("express");
 const router = require("./server/router");
 const initAdmin = require("./server/admin");
-const initDB = require("./db");
+const { initDB, sequelize } = require("./db");
 
 (async() => {
-  const { User, Comment } = await initDB();
+  await initDB();
 
   const app = express();
   
@@ -12,7 +12,7 @@ const initDB = require("./db");
   
   app.use(router);
 
-  const admin = initAdmin([ User, Comment ]);
+  const admin = initAdmin([ sequelize.models.User, sequelize.models.Comment ]);
   app.use(admin.rootPath, admin.router);
   
   app.listen(3000, () => {
