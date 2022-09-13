@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
-    "dev-force-sync": "FORCE_SYNC=true node index.js"
+    "dev": "nodemon index.js",
+    "dev-force-sync": "FORCE_SYNC=true nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +17,9 @@
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.6"
+  },
+  "devDependencies": {
+    "axios": "^0.27.2",
+    "nodemon": "^2.0.19"
   }
 }

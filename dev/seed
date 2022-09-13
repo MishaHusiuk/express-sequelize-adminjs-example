@@ -1,0 +1,28 @@
+#!/usr/bin/env node 
+
+const axios = require('axios');
+
+const host = 'http://localhost:3000';
+
+const createUser = axios
+  .post(`${host}/users`, {
+    firstName: 'John',
+    lastName: 'Doe'
+  })
+  .then(({ data: user }) => {
+    console.log(user);
+    return user;
+  });
+
+const createComment = (user) => axios
+  .post(`${host}/users/${user.id}/comments`, {
+    text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    upvotes: 1000,
+    downvotes: 0
+  })
+  .then(({ data: comment }) => {
+    console.log(comment);
+    return comment;
+  });
+
+createUser.then(createComment);
