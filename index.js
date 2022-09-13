@@ -1,13 +1,22 @@
 const express = require("express");
 const router = require("./server/router");
+const initAdmin = require("./server/admin");
+const initDB = require("./db");
 
-const app = express();
+(async() => {
+  const { User } = await initDB();
 
-app.use(express.json());
+  const app = express();
+  
+  app.use(express.json());
+  
+  app.use(router);
 
-app.use(router);
-
-app.listen(3000, () => {
-  console.log("listening on https://localhost:3000");
-});
+  const admin = initAdmin([ User ]);
+  app.use(admin.rootPath, admin.router);
+  
+  app.listen(3000, () => {
+    console.log("listening on https://localhost:3000");
+  });
+})()
 
