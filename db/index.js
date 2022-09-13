@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const initModels = require("./models");
 
-const sequelize = new Sequelize("test_db", "postgres", "guest", {
+const sequelize = new Sequelize("postgres", "postgres", "guest", {
   host: "localhost",
   dialect: "postgres",
 });
